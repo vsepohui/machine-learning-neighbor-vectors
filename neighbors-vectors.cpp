@@ -1,8 +1,27 @@
 #include <iostream>
 #include <map>
 #include <vector>
+#include <bits/stdc++.h> 
+
+using namespace std; 
 
 
+
+
+class Delta {
+	public:
+		int user;
+		int delta;
+		Delta (int u, int d) {
+			this->user = u;
+			this->delta = d;
+		}
+	
+};
+
+bool my_cmp (const Delta a, const Delta b) {
+    return a.delta < b.delta;
+}
 
 int main () {
 
@@ -44,47 +63,35 @@ int main () {
 	
 
 	// finding nearest neighbors
-	std::map <int,std::vector<int*>> neighbors;
+	std::map <int,std::vector<Delta>> neighbors;
+	std::vector<Delta>::iterator ii;
 	
 	for (user_1 = users_delta.begin(); user_1 != users_delta.end(); user_1++) {
 		for (user_2 = users_delta.begin(); user_2 != users_delta.end(); user_2++) {
 			if (!users_delta[user_1->first][user_2->first]) {
 				continue;
 			}
-			int delta[2] = {(int)user_2->first, users_delta[user_1->first][user_2->first]};
-			neighbors[user_1->first].push_back(delta);
+			int a1 = (int)user_2->first;
+			int a2  = users_delta[user_1->first][user_2->first];
+			Delta *d = new Delta(a1, a2);
+			
+			neighbors[user_1->first].push_back(*d);
 		}
 		
+		std::vector<Delta> v = neighbors[user_1->first];
 
+		sort(v.begin(), v.end(), my_cmp);
+		for (ii = v.begin(); ii != v.end(); ii++) {
+			Delta d = *ii;
+			cout << user_1->first << "\t" << d.user << "\t" << d.delta << "\n";
+		}
 	}
 	
 	
-	std::map <int, std::vector<int*>>::iterator neighbors_id;
-	for (neighbors_id = neighbors.begin(); neighbors_id != neighbors.end(); neighbors_id++) {
-		int user_id = neighbors_id->first;
-		std::vector<int*> n = neighbors[user_id];
-		
-		std::vector <int*>::iterator nv_id;
-		int i = 0;
-		for (nv_id = n.begin(); nv_id != n.end(); nv_id++) {
-			int *d = n[i];
-			int user_2 = d[0];
-			int delta  = d[1];
-			std::cout << user_id << "\t" << user_2 << "\t" << delta << "\n";
-			i ++;
-		}		
-	}
+
 	
-	//std::cout << neighbors[1][0][1] << "\n";
-	//std::cout << neighbors[1][1][1] << "\n";
-	//std::cout << neighbors[1][2][0] << "\n";
+
 	
 }
 
 
-/*
-
-
-1;
-
-*/
