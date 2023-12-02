@@ -42,7 +42,7 @@ for my $user_1 (keys %$users_delta) {
 		$neighbors->{$user_1} //= [];
 		push @{$neighbors->{$user_1}}, [$user_2, $users_delta->{$user_1}->{$user_2}];
 	}
-	$neighbors->{$user_1} = [sort {$b->[1] <=> $a->[1]} @{$neighbors->{$user_1}}];
+	$neighbors->{$user_1} = [sort {$a->[1] <=> $b->[1]} @{$neighbors->{$user_1}}];
 }
 
 use Data::Dumper;
