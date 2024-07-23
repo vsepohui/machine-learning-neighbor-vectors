@@ -1,0 +1,28 @@
+1. COLLECT DATA IN CSV FILE IN FORMAT (input.csv): 
+
+USER_ID	CONTENT_ID	RATE_(-1/0/1)
+
+RATE IS: 
+	LIKE 		= 1
+	DISLIKE 	= -1
+	NO_RATED 	= 0
+	
+
+2. Make:
+
+# g++ neighbors-vectors.cpp -o  neighbors-vectors
+
+3. Run:
+
+# neighbors-vectors < input.csv > output.csv
+
+4. Get result in output.csv (format):
+
+
+USER_ID_FOR_RECOMMENDATION	CONTET_ID_FOR_RECOMMENDATION PEDICTION_OF_RATE_FOR_THIS_USER_AND_CONTENT
+
+IF IS RECOMMENDATION TO SHOW HIGHT RATED CONTENT, AND PREDICTION OF REATE
+
+
+
+
