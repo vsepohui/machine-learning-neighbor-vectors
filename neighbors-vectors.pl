@@ -48,8 +48,8 @@ for my $user_1 (keys %$users_delta) {
 
 for (keys %$neighbors) {
 	my $user_id = $_;
-	for my $recommendation (@{$neighbors->{$user_id}}) {
-		say "$user_id\t". join "\t", @$recommendation;
+	for my $neighbors (@{$neighbors->{$user_id}}) {
+		say "$user_id\t". join "\t", @$neighbors;
 	}
 }
 
