@@ -46,10 +46,25 @@ for my $user_1 (keys %$users_delta) {
 	$neighbors->{$user_1} = [sort {$a->[1] <=> $b->[1]} @{$neighbors->{$user_1}}];
 }
 
+
+my %filtered;
+
 for (keys %$neighbors) {
 	my $user_id = $_;
-	for my $neighbors (@{$neighbors->{$user_id}}) {
-		say "$user_id\t". join "\t", @$neighbors;
+	for my $neighbor (@{$neighbors->{$user_id}}) {
+		$filtered{$user_id} //= {};
+		$filtered{$user_id}{$neighbor->[0]} = undef if $neighbor->[1] > 0;
+	}
+}
+
+
+for my $user_id (keys %filtered) {
+	for my $user2_id (keys %{$filtered{$user_id}}) {
+		for my $cid (keys %{$rates->{$user2_id}}) {
+			if ($rates->{$user2_id}->{$cid} > 0 and not exists $rates->{$user_id}->{$cid}){
+				say "$user_id $cid";
+			}
+		}
 	}
 }
 
