@@ -62,7 +62,7 @@ for my $user_id (keys %filtered) {
 	for my $user2_id (keys %{$filtered{$user_id}}) {
 		for my $cid (keys %{$rates->{$user2_id}}) {
 			if ($rates->{$user2_id}->{$cid} > 0 and not exists $rates->{$user_id}->{$cid}){
-				say "$user_id $cid";
+				say "$user_id\t$cid";
 			}
 		}
 	}
