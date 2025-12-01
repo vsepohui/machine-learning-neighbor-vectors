@@ -46,7 +46,11 @@ for my $user_1 (keys %$users_delta) {
 	$neighbors->{$user_1} = [sort {$a->[1] <=> $b->[1]} @{$neighbors->{$user_1}}];
 }
 
-use Data::Dumper;
-warn Dumper $neighbors;
+for (keys %$neighbors) {
+	my $user_id = $_;
+	for my $recommendation (@{$neighbors->{$user_id}}) {
+		say "$user_id\t". join "\t", @$recommendation;
+	}
+}
 
 1;
